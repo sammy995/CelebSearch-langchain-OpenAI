@@ -10,7 +10,8 @@ import streamlit as st
 
 # Streamlit UI
 apikey = st.text_input("Enter your secret key. This key is not stored anywhere but is required to run the application...")
-st.title('Langchain Demo with OPEN AI API')
+st.title('Celebrity Search')
+st.subheader('Langchain Demo with OPEN AI API')
 input_text = st.text_input("Enter a Celebrity name you want to search...")
 
 os.environ["OPENAI_API_KEY"] = apikey
@@ -24,20 +25,20 @@ if apikey:
 
     #Interact with OpenAi
     llm = OpenAI(temperature=0.6)
-    chain1 =LLMChain(llm=llm, prompt=input_prompt1, verbose=True, output_key='entity')
+    chain1 =LLMChain(llm=llm, prompt=input_prompt1, verbose=False, output_key='entity')
 
     input_prompt2 = PromptTemplate(
         input_variables =['entity'],
-        template = "When was {entity} born. Give only day, month, year"
+        template = "When was {entity} born. Give only day, month, year and nothing else."
     )
 
-    chain2 =LLMChain(llm=llm, prompt=input_prompt2, verbose=True, output_key='birthdate')
+    chain2 =LLMChain(llm=llm, prompt=input_prompt2, verbose=False, output_key='birthdate')
 
     input_prompt3 = PromptTemplate(
         input_variables =['birthdate'],
         template = "Give 5 events in one sentence that happened on the day of {birthdate}"
     )
-    chain3 =LLMChain(llm=llm, prompt=input_prompt3, verbose=True, output_key='major_events')
+    chain3 =LLMChain(llm=llm, prompt=input_prompt3, verbose=False, output_key='major_events')
 
     main_chain = SequentialChain(
         chains=[chain1, chain2, chain3],
@@ -48,5 +49,7 @@ if apikey:
     if input_text:
         st.write(main_chain({'name':input_text}))
 
+
 else:
     st.text("Provide your key")
+
