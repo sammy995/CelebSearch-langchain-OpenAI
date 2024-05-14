@@ -7,6 +7,8 @@ Utilizes Langchain's PromptTemplate and LLMChain to interact with the OpenAI API
 Retrieves the celebrity's introduction, birth date, and major events on their birth date
 Displays the retrieved information in the Streamlit app
 
+### Additional Resources
+[Project Documentation](https://flat-gram-96b.notion.site/Portfolio-Projects-SRL-83d36d9c198b409b8ec6a798b2df68d4?p=4ad099b9128c456dbc1bbc6b3e6043fc&pm=c)
 
 ### Prerequisites
 Python 3.x
